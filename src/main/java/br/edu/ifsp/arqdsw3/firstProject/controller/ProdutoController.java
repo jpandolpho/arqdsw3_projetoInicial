@@ -1,36 +1,21 @@
 package br.edu.ifsp.arqdsw3.firstProject.controller;
 
+import br.edu.ifsp.arqdsw3.firstProject.model.Produto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class ProdutoController {
-    private List<String> produtos = new ArrayList<>(List.of("Notebook", "Smartphone",
-            "Tablet"));
-
     @GetMapping("/produtos")
     public String listar(Model model) {
-        model.addAttribute("produtos", produtos);
-        return "produtos";//com o thymeleaf, a string de retorno é sempre o nome da página que queremos acessar. neste caso, "produtos.html"
-    }
-
-    @PostMapping("/produtos")
-    public String adicionar(@RequestParam String nome, Model model) {
-        produtos.add(nome);
+        List<Produto> produtos = List.of(
+                new Produto("Notebook", 4500.0, 10),
+                new Produto("Smartphone", 2200.0, 25),
+                new Produto("Tablet", 1500.0, 5)
+        );
         model.addAttribute("produtos", produtos);
         return "produtos";
-    }
-
-    @GetMapping("/api/produtos")
-    @ResponseBody
-    public List<String> listarApi() {
-        return produtos;
     }
 }
