@@ -1,6 +1,7 @@
 package br.edu.ifsp.arqdsw3.firstProject.web;
 
 import br.edu.ifsp.arqdsw3.firstProject.model.Produto;
+import br.edu.ifsp.arqdsw3.firstProject.service.ProdutoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +13,20 @@ import java.util.List;
 @Controller
 @RequestMapping("/produtos")
 public class ProdutoController {
-    private List<Produto> produtos = new ArrayList<>(List.of(new Produto("Notebook", 4500.0, 10),
-            new Produto("Smartphone", 2200.0, 25),
-            new Produto("Tablet", 1500.0, 5)));
+    private final ProdutoService service;
+    public ProdutoController(ProdutoService service) { this.service = service; }
 
     @GetMapping
     public String listar(Model model) {
-        model.addAttribute("produtos",produtos);
-        return "produtos";//com o thymeleaf, a string de retorno é sempre o nome da página que queremos acessar. neste caso, "produtos.html"
+        model.addAttribute("produtos", service.listar());
+        return "produtos";
+    }
+
+    @PostMapping("/produtos")
+    public String adicionar(@RequestParam String nome,
+                            @RequestParam double preco,
+                            @RequestParam int estoque) {
+        service.adicionar(nome, preco, estoque);
+        return "redirect:/produtos";
     }
 }

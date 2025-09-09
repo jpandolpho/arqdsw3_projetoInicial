@@ -2,8 +2,8 @@ package br.edu.ifsp.arqdsw3.firstProject.model;
 
 public class Produto {
     private String nome;
-    private Double preco;
-    private Integer estoque;
+    private double preco;
+    private int estoque;
 
     public Produto() {}
 
