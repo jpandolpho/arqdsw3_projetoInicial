@@ -1,4 +1,4 @@
-package br.edu.ifsp.arqdsw3.firstProject.controller;
+package br.edu.ifsp.arqdsw3.firstProject.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
