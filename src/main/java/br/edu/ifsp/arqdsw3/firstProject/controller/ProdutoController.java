@@ -18,7 +18,7 @@ public class ProdutoController {
     @GetMapping("/produtos")
     public String listar(Model model) {
         model.addAttribute("produtos", produtos);
-        return "produtos";
+        return "produtos";//com o thymeleaf, a string de retorno é sempre o nome da página que queremos acessar. neste caso, "produtos.html"
     }
 
     @PostMapping("/produtos")
